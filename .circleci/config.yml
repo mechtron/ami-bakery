@@ -44,7 +44,6 @@ workflows:
       - build:
           filters:
             branches:
-              # only: master
               only: circle-ci-pipeline
       - publish-latest:
           requires:
@@ -52,5 +51,4 @@ workflows:
           context: DockerHub
           filters:
             branches:
-              # only: master
               only: circle-ci-pipeline
