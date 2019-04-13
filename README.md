@@ -59,11 +59,11 @@ In addition to the build's `stdout`, the new AMI ID is also outputted to the fil
 
 To compute the desired "AMI Config Checksum" within the "Build AMI" container:
 
-2.  Within the service's repository, get a list of all files contained in the AMI's passed configuration directories
-3.  Sort the list of files alphabetically
-4.  Calculate the SHA1 checksums of every file
-5.  Concatenate the list of file checksums
-6.  Calculate the SHA1 checksum of the concatenated list of checksums - this is the AMI Config Checksum
+1.  Within the service's repository, get a list of all files contained in the AMI's passed configuration directories
+2.  Sort the list of files alphabetically
+3.  Calculate the SHA1 checksums of every file
+4.  Concatenate the list of file checksums
+5.  Calculate the SHA1 checksum of the concatenated list of checksums - this is the AMI Config Checksum
 
 To look-up an AMI ID by AMI Config Checksum:
 
