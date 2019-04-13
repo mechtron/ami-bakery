@@ -7,7 +7,6 @@ executors:
       - image: circleci/buildpack-deps:stretch
 
 jobs:
-
   build:
     executor: docker-publisher
     steps:
@@ -15,7 +14,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build Docker image
-          command: docker build -t $IMAGE_NAME:latest .
+          command: cd ami-bakery && docker build -t $IMAGE_NAME:latest .
       - run:
           name: Archive Docker image
           command: docker save -o image.tar $
@@ -23,7 +22,6 @@ jobs:
           root: .
           paths:
             - ./image.tar
-  
   publish-latest:
     executor: docker-publisher
     steps:
@@ -41,7 +39,6 @@ jobs:
 
 workflows:
   version: 2
-
   build-master:
     jobs:
       - build:
