@@ -14,7 +14,7 @@ To learn more about the GumGum AMI Bakery, checkout [our slideshow](https://slid
 
 ## Usage
 
-Docker image: `docker pull docker.io/mechtron/ami-bakery`
+Docker image: `docker pull mechtron/ami-bakery`
 
 To use the GumGum AMI Bakery in your CI environment, see the following configuration options:
 
@@ -40,7 +40,7 @@ docker run --rm -t \
     -e AMI_DEFINITION_DIRS=`pwd`/example-app/ami/ \
     --mount type=bind,source=`pwd`,target=`pwd` \
     --mount type=bind,source=$HOME/.aws/,target=/root/.aws \
-    docker.io/mechtron/ami-bakery:latest
+    mechtron/ami-bakery:latest
 ```
 
 #### Getting the AMI ID
