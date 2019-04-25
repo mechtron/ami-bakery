@@ -57,6 +57,16 @@ def disable_output_buffer():
     os.environ['PYTHONUNBUFFERED'] = '1'
 
 
+def output_ami_id_file(ami_id):
+    packer_cwd = os.environ.get('PACKER_CWD', None)
+    if not packer_cwd:
+        packer_cwd = os.getcwd()
+    output_path = "{}/.ami_id.json".format(packer_cwd)
+    with open(output_path, 'w') as outfile:
+        print("AMI ID output path: {}".format(output_path))
+        json.dump(dict(ami_id=ami_id), outfile)
+
+
 def main():
     disable_output_buffer()
     ami_definition_directories = parse_config_directories()
@@ -64,8 +74,7 @@ def main():
     ami_id = lookup_ami_by_config_checksum(ami_config_checksum)
     if not ami_id:
         ami_id = build_new_ami(ami_config_checksum)
-    with open("{}/.ami_id.json".format(os.getcwd()), 'w') as outfile:
-        json.dump(dict(ami_id=ami_id), outfile)
+    output_ami_id_file(ami_id)
 
 
 if __name__ == '__main__':
