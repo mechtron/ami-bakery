@@ -6,7 +6,10 @@ import boto3
 
 
 from checksum import calculate_ami_config_checksum
-from packer import build_new_ami
+from packer import (
+    build_new_ami,
+    get_packer_json_path,
+)
 
 
 def lookup_ami_by_config_checksum(config_checksum):
@@ -58,10 +61,10 @@ def disable_output_buffer():
 
 
 def output_ami_id_file(ami_id):
-    packer_cwd = os.environ.get('PACKER_CWD', None)
-    if not packer_cwd:
-        packer_cwd = os.getcwd()
-    output_path = "{}/.ami_id.json".format(packer_cwd)
+    packer_json_parent_dir = os.path.dirname(get_packer_json_path())
+    if not packer_json_parent_dir:
+        packer_json_parent_dir = os.getcwd()
+    output_path = "{}/.ami_id.json".format(packer_json_parent_dir)
     with open(output_path, 'w') as outfile:
         print("AMI ID output path: {}".format(output_path))
         json.dump(dict(ami_id=ami_id), outfile)

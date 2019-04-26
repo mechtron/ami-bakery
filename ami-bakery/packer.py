@@ -35,7 +35,8 @@ def get_packer_cwd():
 
 
 def get_packer_json_path():
-    return os.environ['PACKER_JSON_PATH'].strip()
+    path = os.environ.get('PACKER_JSON_PATH', None)
+    return path.strip() if path else path
 
 
 def build_new_ami(ami_config_checksum):
